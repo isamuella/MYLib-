@@ -1,0 +1,55 @@
+.library-page {
+  padding: 40px 0;
+  min-height: calc(100vh - 80px);
+}
+
+.loading,
+.no-books {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 1.3em;
+  color: #666;
+}
+
+.book-icon {
+  font-size: 3em;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.book-author {
+  color: #007bff;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.book-description {
+  color: #666;
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.book-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.book-category {
+  background: #007bff;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.8em;
+  text-transform: capitalize;
+}
+
+.book-downloads {
+  color: #666;
+  font-size: 0.9em;
+}
+

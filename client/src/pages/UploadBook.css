@@ -1,0 +1,41 @@
+.upload-page {
+  padding: 40px 0;
+  min-height: calc(100vh - 80px);
+}
+
+.upload-card {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.file-info {
+  margin-top: 10px;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+textarea {
+  resize: vertical;
+  font-family: 'Montserrat', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .upload-card {
+    padding: 20px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}
+

@@ -1,0 +1,120 @@
+.book-detail-page {
+  padding: 40px 0;
+  min-height: calc(100vh - 80px);
+}
+
+.back-btn {
+  margin-bottom: 20px;
+}
+
+.book-header {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.book-info h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.author {
+  font-size: 1.3em;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.description {
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+}
+
+.book-details {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  align-items: center;
+}
+
+.category-badge {
+  background: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.file-size {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.book-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.pdf-viewer {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.pdf-container {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  background: #e9ecef;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .book-info h1 {
+    font-size: 2em;
+  }
+
+  .pdf-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* Minimal styles to support PDF text and annotation layers if present */
+.react-pdf__Page__textContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  color: transparent;
+}
+
+.react-pdf__Page__annotations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: auto;
+}
+
