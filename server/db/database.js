@@ -5,12 +5,16 @@ const bcrypt = require('bcryptjs');
 // MySQL connection configuration
 const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
+  port: parseInt(process.env.DB_PORT) || 3306,
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'password',
   database: process.env.DB_NAME || 'MYLib_project',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  ssl: process.env.DB_HOST !== 'localhost' ? {
+    rejectUnauthorized: false
+  } : undefined
 };
 
 // Create connection pool
@@ -32,8 +36,10 @@ const init = async () => {
     // Create database if it doesn't exist
     const connection = await mysql.createConnection({
       host: dbConfig.host,
+      port: dbConfig.port,
       user: dbConfig.user,
-      password: dbConfig.password
+      password: dbConfig.password,
+      ssl: dbConfig.ssl
     });
     
     await connection.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.database}`);
