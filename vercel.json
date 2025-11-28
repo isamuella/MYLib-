@@ -1,0 +1,20 @@
+{
+  "name": "mylib-project",
+  "version": 2,
+  "buildCommand": "cd client && npm ci && npm run build",
+  "outputDirectory": "client/dist",
+  "installCommand": "cd client && npm ci",
+  "framework": "vite",
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
