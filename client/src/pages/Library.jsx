@@ -133,9 +133,6 @@ const Library = () => {
                 )}
                 <div className="book-meta">
                   <span className="book-category">{book.category}</span>
-                  {book.download_count > 0 && (
-                    <span className="book-downloads"><MdDownload size={16} style={{ verticalAlign: 'middle' }} /> {book.download_count}</span>
-                  )}
                 </div>
               </div>
             ))}

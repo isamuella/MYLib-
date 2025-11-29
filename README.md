@@ -1,437 +1,297 @@
-# MYLib - Digital Library
+# MYLib - Digital Library Platform
 
-> A digital library platform providing educational resources, mental health support, and entrepreneurship content for children in orphanages in Goma, Democratic Republic of Congo.
+A comprehensive digital library platform providing educational resources, mental health content, and entrepreneurship materials for children in orphanages in Goma, Democratic Republic of Congo.
 
-**🌐 Live Demo:** [Add your deployed URL here]  
-**📹 Video Demo:** [Add your video link here]  
-**📄 SRS Document:** [Add your SRS link here]  
-**💻 GitHub:** [Add your repository link here]
-
----
-
-## 🚀 Quick Links
-
-- **[DEPLOYMENT GUIDE](./DEPLOYMENT.md)** - Step-by-step deployment to Vercel + Render (1-2 hours)
-- **[SUBMISSION CHECKLIST](./SUBMISSION_CHECKLIST.md)** - Complete checklist for assignment submission
-- **[Quick Start](#quick-start)** - Get started locally in 10 minutes
-
----
-
-## 📖 Table of Contents
-
-- [Mission](#mission)
-- [Problem Statement](#problem-statement)
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Quick Start](#quick-start)
-- [Detailed Setup Instructions](#detailed-setup-instructions)
-- [Deployment Guide](#deployment-guide)
-- [Default Credentials](#default-credentials)
-- [API Documentation](#api-documentation)
-- [Project Structure](#project-structure)
-
-## Mission
-
-Provide education facilities and systems to children in Eastern DRC affected by conflict. MYLib offers access to learning materials, mental health content, and entrepreneurship resources to help children grow into future leaders and innovators.
-
-## Problem Statement
-
-Children in orphanages in Goma, Eastern Democratic Republic of Congo, face significant barriers to accessing quality educational resources due to:
-
-- Limited physical library infrastructure
-- Lack of internet connectivity
-- Shortage of educational materials
-- Need for mental health and entrepreneurship resources
-
-**Why is this a problem?**
-Without access to educational resources, children cannot develop the skills needed to become future leaders and break the cycle of poverty. The conflict-affected region requires solutions that work offline and provide holistic development opportunities.
-
-**Our Solution:**
-MYLib is a progressive web application that provides:
-
-- Offline-first digital library
-- Mental health resources for emotional well-being
-- Entrepreneurship content to foster self-reliance
-- Role-based access for different user types
+**Live Demo:** https://mylib-frontend.netlify.app/
 
 ## Features
 
-### For Children (no login required)
+- 📚 **Digital Library**: Browse, search, and download educational books
+- 🧠 **Mental Health Resources**: Breathing exercises and wellness activities  
+- 💼 **Entrepreneurship Content**: Business lessons and case studies
+- 👥 **User Management**: Role-based access (Admin, Teacher, Student)
+- 📱 **Offline Support**: Download books for offline reading
+- 🔐 **Secure Authentication**: JWT-based authentication system
 
-- Digital Library: Search, read, and download books
-- Mental Health: Access exercises and stories
-- Entrepreneurship: Books, lessons, and case studies
-- Offline Mode: Access downloaded books without internet
+---
 
-### For Teachers (login required)
+## Complete Setup Guide
 
-- Upload books and resources
-- Manage educational content
-
-### For Admins (login required)
-
-- Manage users (admin, teacher, student)
-- Maintain system and content
-
-## Technology Stack
-
-### Backend
-
-- Node.js + Express
-- MySQL database (mysql2)
-- JWT authentication
-- Multer for file uploads
-- Bcrypt for password hashing
-
-### Frontend
-
-- React 18
-- React Router
-- Axios
-- react-pdf for PDF viewing
-- Service Worker for offline support
-
-## Quick Start
+Follow these steps exactly to get the project running on your local machine.
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
+Before starting, make sure you have these installed:
 
-- **Node.js** (v16 or higher) - [Download here](https://nodejs.org/)
-- **MySQL** (v8 or higher) - [Download here](https://dev.mysql.com/downloads/)
-- **Git** - [Download here](https://git-scm.com/downloads)
+1. **Node.js** (v18 or higher) - [Download here](https://nodejs.org/)
+2. **MySQL** (v8.0 or higher) - [Download here](https://dev.mysql.com/downloads/mysql/)
+3. **Git** - [Download here](https://git-scm.com/downloads)
 
-### Installation Steps
-
-#### 1. Clone the Repository
+### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/mylib-project.git
-cd mylib-project
+git clone https://github.com/isamuella/MYLib-.git
+cd MYLib-
 ```
 
-#### 2. Install Dependencies
+### Step 2: Set Up MySQL Database
 
-```bash
-# Install root dependencies
-npm install
-
-# Install server dependencies
-cd server
-npm install
-
-# Install client dependencies
-cd ../client
-npm install
-
-# Return to project root
-cd ..
-```
-
-#### 3. Configure MySQL Database
-
-**Start MySQL service:**
-
-```bash
-# macOS (using Homebrew)
-brew services start mysql
-
-# Windows
-# Start MySQL from Services or MySQL Workbench
-
-# Linux
-sudo systemctl start mysql
-```
-
-**Create the database:**
-
-```bash
-mysql -u root -p
-```
-
-Then in MySQL shell:
-
+1. **Open MySQL** and create a database:
 ```sql
 CREATE DATABASE MYLib_project;
-EXIT;
 ```
 
-#### 4. Configure Environment Variables
+2. **Note your MySQL credentials:**
+   - Host: `localhost`
+   - Port: `3306`
+   - User: `root` (or your MySQL username)
+   - Password: Your MySQL password
 
-**Create `.env` file in the `server` folder:**
+### Step 3: Configure Backend Environment
 
+1. **Navigate to server folder:**
 ```bash
 cd server
-cp .env.example .env
 ```
 
-**Edit `server/.env` with your values:**
-
+2. **Create a `.env` file** in the `server` folder with this content:
 ```env
 PORT=5000
+JWT_SECRET=samuella_secret_key@1218
 DB_HOST=localhost
+DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_mysql_password_here
 DB_NAME=MYLib_project
-JWT_SECRET=your_secret_key_minimum_32_characters_here
 ```
 
-**For the client, create `client/.env`:**
+**Important:** Replace `your_mysql_password_here` with your actual MySQL password.
 
+3. **Install backend dependencies:**
 ```bash
-cd ../client
-touch .env
+npm install
 ```
 
-**Add to `client/.env`:**
-
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-#### 5. Initialize Database with Sample Data
-
+4. **Seed the database** with sample data:
 ```bash
-# From project root
-cd server
 node scripts/seed.js
 ```
 
-This will create:
+You should see: `Database initialized successfully` and `Seed: demo data inserted`
 
-- Database tables (users, books, mental_health_resources, entrepreneurship_content)
-- Default admin user
-- Sample books, mental health exercises, and entrepreneurship lessons
+### Step 4: Configure Frontend Environment
 
-#### 6. Start the Application
-
-**Option A: Run both servers simultaneously (from project root):**
-
+1. **Navigate to client folder:**
 ```bash
+cd ../client
+```
+
+2. **Install frontend dependencies:**
+```bash
+npm install
+```
+
+### Step 5: Run the Application
+
+#### Option A: Run Both Frontend and Backend Together (Recommended)
+
+From the **root project folder**:
+```bash
+cd ..
+npm install
 npm run dev
 ```
 
-**Option B: Run separately:**
+This will start:
+- Backend server on http://localhost:5000
+- Frontend on http://localhost:3000
 
+#### Option B: Run Frontend and Backend Separately
+
+**Terminal 1 - Backend:**
 ```bash
-# Terminal 1 - Backend
 cd server
 npm start
+```
 
-# Terminal 2 - Frontend
+**Terminal 2 - Frontend:**
+```bash
 cd client
 npm run dev
 ```
 
-#### 7. Access the Application
+### Step 6: Access the Application
 
-- **Frontend:** http://localhost:3000
-- **Backend API:** http://localhost:5000/api
+Open your browser and go to: **http://localhost:3000**
 
-## Default Credentials
+### Step 7: Login Credentials
 
-After seeding the database, you can log in with:
+The seed script creates these default accounts:
 
-### Admin Account
+**Admin Account:**
+- Username: `admin`
+- Password: `admin123`
 
-- **Username:** `admin`
-- **Password:** `admin123`
-- **Permissions:** Full access (user management, content upload, delete)
+**Teacher Account:**
+- Username: `teacher1`
+- Password: `teacher123`
 
-### Teacher Account
+**Note:** Students can browse without logging in. Login is only for teachers and admins.
 
-- **Username:** `teacher1`
-- **Password:** `teacher123`
-- **Permissions:** Upload and manage educational content
-
-### Student Access
-
-- **No login required** for browsing books, mental health resources, and entrepreneurship content
-
-⚠️ **Important:** Change default passwords in production!
+---
 
 ## Project Structure
 
 ```
-MYLib Project/
-├── server/                 # Node.js/Express backend
-│   ├── db/                # Database (MySQL)
-│   ├── middleware/        # Auth middleware
-│   ├── routes/            # API routes
-│   ├── uploads/           # Uploaded files
-│   └── index.js           # Server entrypoint
+MYLib-Project/
 ├── client/                 # React frontend
-│   ├── public/            # Public assets
+│   ├── public/            # Static files
 │   ├── src/
 │   │   ├── components/    # React components
+│   │   ├── pages/         # Page components
 │   │   ├── context/       # Auth context
-│   │   ├── pages/         # App pages
-│   │   └── App.js         # App root
+│   │   └── config.js      # API configuration
 │   └── package.json
-└── README.md
+│
+├── server/                # Node.js backend
+│   ├── db/               # Database configuration
+│   ├── middleware/       # Auth middleware
+│   ├── routes/           # API routes
+│   ├── scripts/          # Database seed scripts
+│   ├── uploads/          # Uploaded files
+│   └── package.json
+│
+└── package.json          # Root package file
 ```
 
-## API Documentation
+---
 
-### Authentication Endpoints
+## API Endpoints
 
-#### Login
+### Authentication
+- `POST /api/auth/login` - User login
+- `GET /api/users/me` - Get current user
 
-```http
-POST /api/auth/login
-Content-Type: application/json
+### Books
+- `GET /api/books` - Get all books (with optional filters)
+- `GET /api/books/:id` - Get single book
+- `POST /api/books` - Upload new book (Admin/Teacher only)
+- `POST /api/books/:id/download` - Track book download
 
-{
-  "username": "admin",
-  "password": "admin123"
-}
+### Mental Health
+- `GET /api/mental-health` - Get all mental health resources
+- `GET /api/mental-health/:id` - Get single resource
+
+### Entrepreneurship
+- `GET /api/entrepreneurship` - Get all entrepreneurship content
+- `GET /api/entrepreneurship/:id` - Get single content
+
+---
+
+## Troubleshooting
+
+### Issue: "Cannot connect to database"
+
+**Solution:** 
+1. Make sure MySQL is running
+2. Check your `.env` credentials are correct
+3. Verify the database `MYLib_project` exists
+
+### Issue: "Port 5000 already in use"
+
+**Solution:**
+```bash
+# Kill process on port 5000 (macOS/Linux)
+lsof -ti:5000 | xargs kill -9
+
+# Or on Windows
+netstat -ano | findstr :5000
+taskkill /PID <PID> /F
 ```
 
-#### Register (Admin only)
+### Issue: "Module not found"
 
-```http
-POST /api/auth/register
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "username": "newuser",
-  "password": "password123",
-  "role": "student" // or "teacher", "admin"
-}
+**Solution:**
+```bash
+# Reinstall dependencies
+cd server && npm install
+cd ../client && npm install
 ```
 
-### Books Endpoints
+### Issue: Books not loading
 
-- `GET /api/books` - List all books (supports ?category=education&search=term)
-- `GET /api/books/:id` - Get book details
-- `POST /api/books` - Upload book (teacher/admin, multipart/form-data)
-- `DELETE /api/books/:id` - Delete book (admin only)
-- `POST /api/books/:id/download` - Track download count
+**Solution:**
+1. Make sure backend is running on port 5000
+2. Check `client/src/config.js` has correct API URL
+3. Verify database was seeded: `cd server && node scripts/seed.js`
 
-### Mental Health Endpoints
+---
 
-- `GET /api/mental-health` - List resources (supports ?type=exercise or ?type=story)
-- `GET /api/mental-health/:id` - Get resource details
-- `POST /api/mental-health` - Create resource (teacher/admin)
-- `DELETE /api/mental-health/:id` - Delete resource (admin only)
+## Deployment
 
-### Entrepreneurship Endpoints
+### Production URLs
 
-- `GET /api/entrepreneurship` - List content (supports ?type=lesson or ?type=case_study)
-- `GET /api/entrepreneurship/:id` - Get content details
-- `POST /api/entrepreneurship` - Create content (teacher/admin)
-- `DELETE /api/entrepreneurship/:id` - Delete content (admin only)
+- **Frontend:** https://mylib-frontend.netlify.app/
+- **Backend:** https://mylib-backend1.onrender.com/api
+- **Database:** Railway MySQL
 
-### User Management Endpoints
+### Deploy Your Own Instance
 
-- `GET /api/users` - List all users (admin only)
-- `GET /api/users/me` - Get current user info (authenticated)
+#### Frontend (Netlify)
+1. Connect your GitHub repo to Netlify
+2. Set build settings:
+   - Base directory: `client`
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+3. Deploy
 
-## Offline Capabilities
+#### Backend (Render)
+1. Create new Web Service on Render
+2. Connect your GitHub repo
+3. Set build command: `cd server && npm install`
+4. Set start command: `cd server && node index.js`
+5. Add environment variables from `.env`
+6. Deploy
 
-- Service Workers for caching
-- LocalStorage for download info
-- Downloaded books remain accessible offline (7+ days)
+#### Database (Railway)
+1. Create MySQL database on Railway
+2. Note the connection details
+3. Update backend `.env` with Railway credentials
+4. Run seed script with Railway credentials
 
-## Constraints
+---
 
-- Lightweight app (<50MB)
-- Offline reading supported
-- Open-source tools only
-- Android + modern browsers supported
-- French UI, English documentation
-- Supports ~20 concurrent users
+## Technologies Used
 
-## Supported Browsers
+### Frontend
+- React 18
+- React Router v6
+- Axios
+- React PDF
+- React Icons
 
-- Google Chrome
-- Microsoft Edge
-- Safari
-- Firefox
+### Backend
+- Node.js
+- Express.js
+- MySQL 2
+- JWT Authentication
+- Multer (file uploads)
+- bcryptjs (password hashing)
 
-## Development Process
+---
 
-This project follows Agile methodology with iterative feedback and continuous improvement.
+## Contributing
 
-## Testing
+This project was developed by **Ineza Samuella** from African Leadership University as part of a capstone project to provide educational resources to children in the Democratic Republic of Congo.
 
-- Manual regression steps are documented in `TEST_PLAN.md`
-- Offline scenario (download + airplane mode) verified
-- Chrome, Edge, and Android Chrome smoke-tested
+---
 
 ## License
 
 MIT License
 
-## Author
-
-Ineza Samuella – African Leadership University
-
-## Support
-
-Open an issue in the project repository for questions or support.
-
 ---
 
-## Deployment (Beginner-friendly) — Vercel (frontend) + Render or Railway (backend + MySQL)
+## Acknowledgments
 
-Goal: make your project publicly accessible with a URL so graders can access the prototype.
-
-Overview:
-
-- Frontend: deploy the `client` folder as a Vite app on Vercel (free, automatic GitHub integration).
-- Backend: deploy the `server` folder on Render or Railway (both support Node services). For the database, create a managed MySQL instance (Railway or PlanetScale) and point the backend to it.
-
-Step-by-step (Vercel + Render example)
-
-1. Push your repository to GitHub and make it public.
-
-2. Backend (Render)
-
-- Sign up at https://render.com and connect your GitHub account.
-- Create a new Web Service, select your repository and set the Root Directory to `server`.
-- Build/Start Command: `npm start` (or `node index.js`).
-- Environment:
-  - `PORT` = `5000`
-  - `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` = values from your managed MySQL
-  - `JWT_SECRET` = a secure string
-- Database: create a managed MySQL instance on Railway or another provider. When the DB is created, copy the host/user/password and set them in Render's environment settings.
-- After deployment, you can run the seed script from the Render dashboard (one-off job) or run the seed script locally pointing to your remote DB:
-  ```bash
-  # locally, with .env pointing to remote DB
-  npm run seed
-  ```
-
-3. Frontend (Vercel)
-
-- Sign up at https://vercel.com and connect your GitHub account.
-- Import the project and, when configuring, set the Root Directory to `client`.
-- Build Command: `npm run build` (Vite) — Vercel will detect Vite automatically for many repos.
-- Output Directory: `dist`
-- Environment Variable: `VITE_API_URL` = `https://<your-backend-url>/api` (Render will provide a URL for your service)
-- Deploy. Vercel will build and publish a public URL (e.g., `https://mylib.vercel.app`).
-
-4. Verify
-
-- Open the frontend URL and verify pages (Library, Mental Health, Entrepreneurship, Login/Upload flow).
-- If uploads are used, ensure the backend's `uploads/` path is accessible or configure persistent storage (Render has volumes on paid plans). For the assignment, seed data and simple file usage is usually enough.
-
-Alternative simpler stack (if you want everything in one place):
-
-- Render can host both backend and static frontend. You can deploy the frontend by building locally and pointing Render to the `client/dist` folder or use Render static site options. Railway also supports full-stack deployments.
-
-Notes & tips for the submission
-
-- Make the repo public and add a top-level `SETUP.md` or enhance this `README.md` with every exact command needed to get the app running locally and in production.
-- Add a link to your SRS and a link to the recorded video in the Google Doc (per assignment instructions).
-- Ensure your README includes the exact live URL and any credentials needed to access admin features (change passwords in production).
-
-Checklist for grading (make these links visible in your Google Doc):
-
-- Live public URL for the app (frontend) — required.
-- Public GitHub repo link — required.
-- Link to SRS document — required.
-- Link to your recorded video in Google Doc (5–10 minutes) — required.
-
-If you want, I can take care of the deploy steps now: I can help create the Render service and Vercel project instructions and guide you through adding environment variables and running the seed. Tell me which provider you prefer for the database (Railway/PlanetScale/Render) and I will produce exact steps and commands.
+Special thanks to African Leadership University and all contributors who made this project possible.

@@ -24,10 +24,9 @@ const BookDetail = () => {
         const response = await axios.get(`${API_URL}/books/${id}`);
         const bookData = response.data;
         setBook(bookData);
-        // Use full URL for PDF viewing
-        const fullUrl = bookData.file_url.startsWith('http') 
-          ? bookData.file_url 
-          : `${window.location.protocol}//${window.location.hostname}:5000${bookData.file_url}`;
+        // Construct the full backend URL for the PDF
+        const backendBase = API_URL.replace('/api', '');
+        const fullUrl = `${backendBase}${bookData.file_url}`;
         setDownloadUrl(fullUrl);
         console.log('Book loaded. Download URL:', fullUrl);
       } catch (error) {
